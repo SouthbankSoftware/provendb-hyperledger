@@ -1,0 +1,40 @@
+/*
+ * @Author: guiguan
+ * @Date:   2020-08-13T12:41:13+10:00
+ * @Last modified by:   guiguan
+ * @Last modified time: 2020-08-13T17:15:01+10:00
+ */
+
+syntax = "proto3";
+
+option go_package = "proto";
+option java_multiple_files = true;
+option java_package = "com.provendb.hyperledger.proto";
+option java_outer_classname = "HyperledgerProto";
+option objc_class_prefix = "SPV";
+
+package hyperledger;
+
+import "google/protobuf/timestamp.proto";
+
+service HyperledgerService {
+  rpc EmbedData(EmbedDataRequest) returns (EmbedDataReply) {}
+  rpc GetTransactionByID(GetTransactionByIDRequest) returns (Transaction) {}
+}
+
+message EmbedDataRequest { string data = 1; }
+
+message EmbedDataReply {
+  string txn_id = 1;
+  google.protobuf.Timestamp create_time = 2;
+  uint64 block_number = 3;
+}
+
+message GetTransactionByIDRequest { string txn_id = 1; }
+
+message Transaction {
+  string txn_id = 1;
+  google.protobuf.Timestamp create_time = 2;
+  uint64 block_number = 3;
+  string data = 4;
+}
