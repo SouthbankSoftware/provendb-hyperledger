@@ -2,7 +2,7 @@
  * @Author: guiguan
  * @Date:   2020-08-13T12:26:53+10:00
  * @Last modified by:   guiguan
- * @Last modified time: 2020-08-13T17:46:01+10:00
+ * @Last modified time: 2020-08-13T18:00:22+10:00
  */
 
 //go:generate protoc --plugin=protoc-gen-doc=proto/protoc-gen-doc --doc_out=proto --doc_opt=markdown,docs.md -I proto --go_out=plugins=grpc:proto proto/hyperledger.proto
@@ -96,6 +96,8 @@ func (s *service) Run() error {
 	if s.client != nil {
 		return fmt.Errorf("the %s service is already running", appName)
 	}
+
+	log.SF().Bg().Info("start", zap.String("hostPort", s.HostPort))
 
 	wallet, err := gateway.NewFileSystemWallet("data/wallet")
 	if err != nil {
@@ -244,7 +246,7 @@ func (s *service) EmbedData(ctx context.Context, in *pb.EmbedDataRequest) (
 		return
 	}
 
-	bn, err := s.getBlockNumberByTxnID(reply.Txn)
+	bn, err := s.getBlockNumberByTxnID(reply.TxnID)
 	if err != nil {
 		er = err
 		return
@@ -257,7 +259,7 @@ func (s *service) EmbedData(ctx context.Context, in *pb.EmbedDataRequest) (
 	}
 
 	rp = &pb.EmbedDataReply{
-		TxnId:       reply.Txn,
+		TxnId:       reply.TxnID,
 		CreateTime:  ct,
 		BlockNumber: bn,
 	}
