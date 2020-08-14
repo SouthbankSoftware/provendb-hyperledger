@@ -1,13 +1,19 @@
 # provendb-hyperledger
 
-ProvenDB Hyperledger service is a client wallet for a Hyperledger network, which is consumed by ProvenDB Anchor service
+ProvenDB Hyperledger service is a client wallet for a Hyperledger network, which is consumed by ProvenDB Anchor service. At the moment, you can use this repo to run a POC Hyperledger testnetwork and a ProvenDB Hyperledger wallet service on the same host.
 
 ## Usage
 
-### Setup a test network
+### Prerequisite
+
+- go: 1.14+
+
+- docker-compose: 1.26.2+
+
+### Setup
 
 1. clone this repo
-2. `./bootstrap.sh`
+2. download necessary deps in this repo: `./bootstrap.sh`
 3. add the following mapping to `/etc/hosts`:
 
     ```zsh
@@ -17,10 +23,16 @@ ProvenDB Hyperledger service is a client wallet for a Hyperledger network, which
     127.0.0.1 ca.example.com
     ```
 
-4. `./create_network.sh`
-5. `./deploy_chaincode.sh` (this can be rerun to update the chaincode, but beware to increment the version `CC_VERSION`)
+4. create a Hyperledger test network: `./create_network.sh` (re-run this to recreate the network)
+5. compile and deploy chaincode: `./deploy_chaincode.sh` (re-run to update the chaincode, but beware to increment the version in `CC_VERSION`)
+6. build and run the Hyperledger wallet service:
 
-### Destroy current test network
+    ```zsh
+    make
+    ./hyperledger
+    ```
+
+### Destroy
 
 1. `./delete_network.sh`
 2. remove the mapping from `/etc/hosts` set in [the step 3 of the network setup](#setup-a-test-network)

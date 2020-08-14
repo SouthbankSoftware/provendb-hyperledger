@@ -14,10 +14,10 @@ networks:
 #   test:
 
 services:
-  explorerdb.test:
+  explorerdb:
     image: hyperledger/explorer-db:latest
-    container_name: explorerdb.test
-    hostname: explorerdb.test
+    container_name: explorerdb
+    hostname: explorerdb
     environment:
       - DATABASE_DATABASE=fabricexplorer
       - DATABASE_USERNAME=hppoc
@@ -32,13 +32,13 @@ services:
     networks:
       - test.com
 
-  explorer.test:
+  explorer:
     image: hyperledger/explorer:latest
-    container_name: explorer.test
-    hostname: explorer.test
+    container_name: explorer
+    hostname: explorer
     restart: always
     environment:
-      - DATABASE_HOST=explorerdb.test
+      - DATABASE_HOST=explorerdb
       - DATABASE_DATABASE=fabricexplorer
       - DATABASE_USERNAME=hppoc
       - DATABASE_PASSWD=password
@@ -64,7 +64,7 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      explorerdb.test:
+      explorerdb:
         condition: service_healthy
     healthcheck:
       test: "wget --quiet --tries=1 --spider http://localhost:8080 || exit 1"
