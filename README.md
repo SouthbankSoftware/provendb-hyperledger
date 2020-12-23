@@ -14,7 +14,7 @@ ProvenDB Hyperledger service is a client wallet for a Hyperledger network, which
   - [SSH](#ssh)
   - [Home Directories (`/home/hlf`)](#home-directories-homehlf)
   - [Install/upgrade go](#installupgrade-go)
-  - [Keep process running after ssh](#keep-process-running-after-ssh)
+  - [Keep process running after SSH](#keep-process-running-after-ssh)
 
 ## Usage
 
@@ -128,7 +128,7 @@ else
 fi
 ```
 
-### Keep process running after ssh
+### Keep process running after SSH
 
 https://askubuntu.com/questions/8653/how-to-keep-processes-running-after-ending-ssh-session
 https://tmuxcheatsheet.com/
