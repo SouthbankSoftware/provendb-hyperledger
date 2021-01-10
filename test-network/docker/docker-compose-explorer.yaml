@@ -59,7 +59,7 @@ services:
     command: sh -c "sleep 30 &&
       mv /tmp/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/*_sk /tmp/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/priv_sk 2>/dev/null  || true &&
       mv /tmp/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/*.pem /tmp/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/cert.pem 2>/dev/null || true &&
-      node /opt/explorer/main.js &&
+      node /opt/explorer/app/main.js &&
       tail -f /dev/null"
     ports:
       - 8080:8080
